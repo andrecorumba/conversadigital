@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "conversadigital"
+version = "0.1.0"
+description = "ConversaDigital é um portal inovador que explora o mundo da tecnologia, inteligência artificial e cotidiano, proporcionando aos leitores uma visão abrangente e acessível sobre as últimas tendências e avanços nesse fascinante universo."
+authors = ["andrecorumba"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.doc.dependencies]
+mkdocs-material = "^9.1.21"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
