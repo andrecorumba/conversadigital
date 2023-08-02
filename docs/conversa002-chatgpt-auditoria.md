@@ -1,6 +1,6 @@
 # 2. Como o Chat GPT pode ajudar nos trabalhos de auditoria.
 
-*Observação: partes deste texto foi escrita pelo modelo gpt-3.5-turbo.*
+*Observação: parte deste texto foi escrita pelo modelo gpt-3.5-turbo.*
 
 ## O que é o Chat GPT
 

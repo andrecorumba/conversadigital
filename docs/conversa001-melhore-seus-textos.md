@@ -1,6 +1,6 @@
 # 1. Melhore seus textos usando o Chat GPT
 
-*Observação: partes deste texto foi escrita pelo modelo gpt-3.5-turbo.*
+*Observação: parte deste texto foi escrita pelo modelo gpt-3.5-turbo.*
 
 Se você é um escritor, estudante ou profissional que busca aprimorar suas habilidades de redação e escrita, o Chat GPT é uma ferramenta poderosa que pode impulsionar sua criatividade e ajudá-lo a criar textos mais envolventes e bem escritos. O Chat GPT é baseado na tecnologia de linguagem natural GPT-3.5, desenvolvida pela OpenAI, e é capaz de gerar respostas completas e coerentes para uma ampla variedade de tópicos.
 
@@ -43,5 +43,3 @@ O uso contínuo do Chat GPT pode aprimorar suas habilidades de escrita ao longo 
 ## Conclusão
 
 O Chat GPT é uma ferramenta incrível para melhorar a qualidade dos seus textos e aprimorar suas habilidades de escrita. Ao utilizar essa inteligência artificial como assistente de redação, você pode obter ideias criativas, aperfeiçoar sua estrutura de texto e receber feedback útil para aprimorar suas composições.
-
-Lembre-se de que a prática é fundamental, então não hesite em explorar e experimentar diferentes formas de interação com o Chat GPT para obter o máximo de benefícios. Com o tempo, você perceberá uma melhoria significativa na clareza, coesão e originalidade dos seus textos. Portanto, mãos à obra e comece a aprimorar suas habilidades de redação com a ajuda dessa poderosa ferramenta de inteligência artificial!
