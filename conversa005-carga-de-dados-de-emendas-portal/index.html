@@ -1,0 +1,702 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../conversa004-prompt-gerador-de-prompt/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.1, mkdocs-material-9.1.21">
+    
+    
+      
+        <title>5. Carga de Dados de Emendas Parlamentares usando Python e Pandas - ConversaDigital</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-carga-de-dados-de-emendas-parlamentares-usando-python-e-pandas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ConversaDigital" class="md-header__button md-logo" aria-label="ConversaDigital" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ConversaDigital
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Carga de Dados de Emendas Parlamentares usando Python e Pandas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ConversaDigital" class="md-nav__button md-logo" aria-label="ConversaDigital" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ConversaDigital
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Conheça o ConversaDigital
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conversa001-melhore-seus-textos/" class="md-nav__link">
+        1. Melhore seus textos usando o Chat GPT
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conversa002-chatgpt-auditoria/" class="md-nav__link">
+        2. Como o Chat GPT pode ajudar nos trabalhos de auditoria.
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conversa003-prompts-eficientes/" class="md-nav__link">
+        3. Como construir prompts eficientes no ChatGPT
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conversa004-prompt-gerador-de-prompt/" class="md-nav__link">
+        4. Prompt gerador de prompt
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          5. Carga de Dados de Emendas Parlamentares usando Python e Pandas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        5. Carga de Dados de Emendas Parlamentares usando Python e Pandas
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-portal-da-transparencia" class="md-nav__link">
+    O Portal da Transparência
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-abertos-de-emendas-parlamentares" class="md-nav__link">
+    Dados abertos de Emendas Parlamentares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-linguagem-de-programacao-python" class="md-nav__link">
+    A Linguagem de Programação Python
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-biblioteca-pandas" class="md-nav__link">
+    A Biblioteca Pandas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-que-a-biblioteca-pandas-difere-do-excel-no-dia-a-dia" class="md-nav__link">
+    No que a biblioteca Pandas difere do Excel no dia-a-dia?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-projeto-jupyter-notebook" class="md-nav__link">
+    O Projeto Jupyter Notebook
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-o-google-colab" class="md-nav__link">
+    O que é o Google Colab?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-os-dados-no-google-colab" class="md-nav__link">
+    Carregando os dados no Google Colab
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-data-frame-pandas" class="md-nav__link">
+    O que é um Data Frame Pandas?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limpeza-dos-dados" class="md-nav__link">
+    Limpeza dos dados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operacoes-simples-e-consultas-no-data-frame" class="md-nav__link">
+    Operações simples e consultas no Data Frame
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-portal-da-transparencia" class="md-nav__link">
+    O Portal da Transparência
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-abertos-de-emendas-parlamentares" class="md-nav__link">
+    Dados abertos de Emendas Parlamentares
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-linguagem-de-programacao-python" class="md-nav__link">
+    A Linguagem de Programação Python
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-biblioteca-pandas" class="md-nav__link">
+    A Biblioteca Pandas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#no-que-a-biblioteca-pandas-difere-do-excel-no-dia-a-dia" class="md-nav__link">
+    No que a biblioteca Pandas difere do Excel no dia-a-dia?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-projeto-jupyter-notebook" class="md-nav__link">
+    O Projeto Jupyter Notebook
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-o-google-colab" class="md-nav__link">
+    O que é o Google Colab?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-os-dados-no-google-colab" class="md-nav__link">
+    Carregando os dados no Google Colab
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-data-frame-pandas" class="md-nav__link">
+    O que é um Data Frame Pandas?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limpeza-dos-dados" class="md-nav__link">
+    Limpeza dos dados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operacoes-simples-e-consultas-no-data-frame" class="md-nav__link">
+    Operações simples e consultas no Data Frame
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="5-carga-de-dados-de-emendas-parlamentares-usando-python-e-pandas">5. Carga de Dados de Emendas Parlamentares usando Python e Pandas</h1>
+<p><em>Observação: parte deste texto foi escrita pelo modelo gpt-3.5-turbo.</em></p>
+<p>No cenário atual de transparência e acesso à informação, o uso de ferramentas tecnológicas tornou-se essencial para a análise e compreensão de dados governamentais. Nesse contexto, o carregamento e manipulação de dados de emendas parlamentares ganham destaque, permitindo aos cidadãos e pesquisadores uma visão mais clara sobre como essas emendas são alocadas e utilizadas. Neste artigo, exploraremos como realizar essa tarefa utilizando a linguagem de programação Python e a biblioteca Pandas.</p>
+<h2 id="o-portal-da-transparencia">O Portal da Transparência</h2>
+<p>O Portal da Transparência do Governo Federal, https://portaldatransparencia.gov.br, é uma plataforma digital fornecida pelo governo federal para disponibilizar informações sobre a execução orçamentária e financeira, permitindo que cidadãos e entidades fiscalizem os gastos públicos de forma mais direta.</p>
+<h2 id="dados-abertos-de-emendas-parlamentares">Dados abertos de Emendas Parlamentares</h2>
+<p>Os dados abertos de emendas parlamentares são conjuntos de informações que detalham como os parlamentares direcionam recursos do orçamento para ações específicas, como obras, projetos sociais e investimentos. Esses dados proporcionam uma visão das alocações de recursos e auxiliam na análise da atuação dos representantes eleitos.</p>
+<p>Os dados de emendas parlamentares da União estão disponíveis na parte de dados abertos do Portal da Transparência em:
+https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares</p>
+<p><img alt="Emendas" src="/docs/imagens/emendas.png" /></p>
+<h2 id="a-linguagem-de-programacao-python">A Linguagem de Programação Python</h2>
+<p>Python é uma linguagem de programação amplamente utilizada devido à sua simplicidade e versatilidade. Com uma sintaxe legível e expressiva, Python se tornou uma escolha popular para análise de dados e automação de tarefas. Ela faz uso de uma gama de bibliotecas implementadas para fins específicos dentro da linguagem. O interpretador Python pode ser baixado em: https://www.python.org.</p>
+<h2 id="a-biblioteca-pandas">A Biblioteca Pandas</h2>
+<p>Pandas é uma biblioteca Python amplamente adotada para análise de dados. Ela oferece estruturas de dados flexíveis e eficientes, como o DataFrame, que permite manipular e analisar dados de forma intuitiva. A bibloteca Pandas pode ser instalada no Python por meio do comando: <code>pip install pandads</code> e a chamada no código por meio da linha <code>import pandas as pd</code>.</p>
+<h2 id="no-que-a-biblioteca-pandas-difere-do-excel-no-dia-a-dia">No que a biblioteca Pandas difere do Excel no dia-a-dia?</h2>
+<p>Enquanto o Excel é uma ferramenta poderosa para análise de dados, o Pandas se destaca por possibilitar análises mais complexas e automatizadas. Ele suporta manipulação de grandes volumes de dados, automação de processos e integração com outras bibliotecas de análise e visualização.</p>
+<h2 id="o-projeto-jupyter-notebook">O Projeto Jupyter Notebook</h2>
+<p>O Projeto Jupyter Notebook, https://jupyter.org,  é uma aplicação que permite a criação e compartilhamento de documentos interativos contendo código, visualizações e textos explicativos. É amplamente utilizado na análise de dados e na pesquisa científica.</p>
+<h2 id="o-que-e-o-google-colab">O que é o Google Colab?</h2>
+<p>O Google Colab é uma ferramenta poderosa, baseada em nuvem, para desenvolvimento em Python, especialmente quando se trata de análise de dados, aprendizado de máquina e visualização. Ele oferece recursos como acesso a GPUs, "Graphics Processing Unit" (Unidade de Processamento Gráfico) e TPUs, "Tensor Processing Unit" (Unidade de Processamento de Tensores) para acelerar o processamento de dados e treinamento de modelos. Com essas etapas básicas, você estará pronto para explorar e analisar dados de emendas parlamentares de maneira eficiente e colaborativa.</p>
+<p>Para carregar os dados de emendas parlamentares no Google Colab, podemos usar a biblioteca Pandas e as funções de leitura de dados, como <code>read_csv()</code> ou <code>read_excel()</code>, dependendo do formato dos dados fornecidos.</p>
+<p>Para acessar o Google Colab é necessário possuir uma conta no Google. </p>
+<h2 id="carregando-os-dados-no-google-colab">Carregando os dados no Google Colab</h2>
+<p>A seguir constam passos básicos para usar o Google Colab, um ambiente baseado em nuvem para desenvolvimento em Python utilizando Jupyter Notebooks:</p>
+<ol>
+<li>
+<p><strong>Acesso ao Google Colab</strong>:
+   Acesse o Google Colab através do link <a href="https://colab.research.google.com/">https://colab.research.google.com/</a>. Você precisará estar logado em uma conta do Google para começar.</p>
+</li>
+<li>
+<p><strong>Criar um Novo Notebook</strong>:
+   No Colab, você pode criar um novo notebook do zero ou fazer o upload de um notebook existente a partir do seu computador ou diretamente de um repositório no GitHub.</p>
+</li>
+<li>
+<p><strong>Ambiente de Notebook</strong>:
+   O ambiente do notebook é dividido em células, que podem conter código, texto ou visualizações. Você pode adicionar uma nova célula clicando no botão "+ Código" ou "+ Texto" na barra de ferramentas.</p>
+</li>
+<li>
+<p><strong>Escrevendo Código</strong>:
+   Nas células de código, você pode escrever código Python. Para executar o código em uma célula, clique no botão "Play" à esquerda da célula ou use o atalho "Shift + Enter". O resultado da execução será exibido logo abaixo da célula.</p>
+</li>
+<li>
+<p><strong>Instalando Pacotes</strong>:
+   Se precisar instalar pacotes adicionais, basta usar o comando <code>!pip install nome_do_pacote</code> em uma célula de código e executá-la. O Colab permite a instalação de pacotes diretamente no ambiente.</p>
+</li>
+<li>
+<p><strong>Uso de Bibliotecas</strong>:
+   Importe bibliotecas, como o Pandas, usando os comandos usuais. Por exemplo: <code>import pandas as pd</code>.</p>
+</li>
+<li>
+<p><strong>Carregando Dados</strong>:
+   Você pode carregar dados no Colab a partir do seu próprio computador, do Google Drive ou diretamente da web. Por exemplo, para carregar um arquivo CSV usando o Pandas:</p>
+</li>
+</ol>
+<p><code>python
+   import pandas as pd
+   df = pd.read_csv("/content/Emendas.csv", sep=";", encoding="latin-1")
+   df.head()</code></p>
+<ol>
+<li>
+<p><strong>Visualizações e Análises</strong>:
+   O Colab é ótimo para criar visualizações e realizar análises exploratórias de dados. Use bibliotecas como Matplotlib, Seaborn ou Plotly para criar gráficos e plots informativos.</p>
+</li>
+<li>
+<p><strong>Salvar e Compartilhar</strong>:
+   Você pode salvar seu notebook no Google Drive ou fazer o download dele em vários formatos, incluindo .ipynb, .py e .html. Além disso, você pode compartilhar seu notebook com outras pessoas através do link de compartilhamento.</p>
+</li>
+<li>
+<p><strong>Persistência</strong>:
+   O ambiente do Colab é temporário, e o ambiente de execução (incluindo os arquivos carregados) pode ser reiniciado após algum tempo de inatividade. Certifique-se de salvar seus resultados e códigos regularmente.</p>
+</li>
+</ol>
+<h2 id="o-que-e-um-data-frame-pandas">O que é um Data Frame Pandas?</h2>
+<p>Um DataFrame é uma estrutura de dados bidimensional oferecida pela biblioteca Pandas. Ele se assemelha a uma planilha, permitindo a organização e análise de dados de maneira tabular. Cada coluna em um DataFrame pode ter um tipo de dado diferente.</p>
+<h2 id="limpeza-dos-dados">Limpeza dos dados</h2>
+<p>A fase de limpeza dos dados é uma etapa que consome grande parte do tempo de um Analista de Dados.</p>
+<p>No caso das emendas faz necessário alterar os campos de valores que estão como string para float, usando o método .astype() com substituição de vírgulas por pontos. Um exemplo de limpeza no campo <code>'Valor Empenhado'</code></p>
+<pre><code class="language-python">df['Valor Empenhado'] = df['Valor Empenhado'].str.replace(',', '.').astype(float)
+</code></pre>
+<h2 id="operacoes-simples-e-consultas-no-data-frame">Operações simples e consultas no Data Frame</h2>
+<p>Após carregar os dados em um DataFrame, podemos realizar diversas operações e consultas para obter informações específicas. Podemos filtrar dados, agrupar informações, calcular estatísticas e criar visualizações, tudo isso de forma eficiente utilizando a sintaxe e os métodos fornecidos pelo Pandas.</p>
+<p>Seguem alguns tipos de filtros que podem ser usados:</p>
+<ul>
+<li><strong>Filtrar com base em uma condição simples</strong>:</li>
+</ul>
+<p>Vamos supor que queremos apenas as emendas com valor empenhado maior que 1 milhão de reais:</p>
+<pre><code class="language-python">filtro = df['Valor Empenhado'] &gt; 1000000
+df[filtro].head()
+</code></pre>
+<ul>
+<li><strong>Filtrar com base em múltiplas condições</strong>:</li>
+</ul>
+<p>Suponha que queremos as emendas com valor maior que 1 milhão para o município de Campo Grande-MS:</p>
+<pre><code class="language-python">filtro = (df['Valor Empenhado'] &gt; 1000000) &amp; (df['Localidade do gasto'] == 'CAMPO GRANDE - MS')
+df[filtro].head()
+</code></pre>
+<ul>
+<li><strong>Filtrar com base em valores em uma lista</strong>:</li>
+</ul>
+<p>Suponha que queremos as emendas de três municípios em uma lista específica:</p>
+<pre><code class="language-python">lista_de_municipios = ['CAMPO GRANDE - MS', 'CORUMBÁ - MS', 'AREIAS - SP']
+filtro = df['Localidade do gasto'].isin(lista_de_municipios)
+df[filtro]
+</code></pre>
+<ul>
+<li><strong>Filtrar com base em uma string parcial</strong>:</li>
+</ul>
+<p>Suponha que queremos toda as emendas do parlamentar cujo nome começa com ROSE:</p>
+<pre><code class="language-python">filtro = df['Nome do Autor da Emenda'].str.startswith('ROSE')
+df[filtro].head()
+</code></pre>
+<p>Esses são apenas alguns exemplos de como você pode filtrar DataFrames usando Pandas. A biblioteca oferece muitas outras opções e métodos para realizar operações de filtragem, seja por condições simples, múltiplas condições ou outros critérios específicos aos seus dados.</p>
+<h2 id="conclusao">Conclusão</h2>
+<p>Em resumo, a combinação do Python e da biblioteca Pandas oferece uma abordagem poderosa e flexível para carregar, manipular e analisar dados de emendas parlamentares. O uso de ambientes como o Google Colab e técnicas como o Projeto Jupyter Notebook possibilita uma análise interativa e visualmente rica, contribuindo para uma compreensão mais profunda das decisões orçamentárias dos representantes eleitos. Com essas ferramentas ao alcance, os cidadãos têm a oportunidade de se tornarem participantes ativos na fiscalização e no acompanhamento do uso dos recursos públicos.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
