@@ -15,7 +15,7 @@ Os dados abertos de emendas parlamentares são conjuntos de informações que de
 Os dados de emendas parlamentares da União estão disponíveis na parte de dados abertos do Portal da Transparência em:
 https://portaldatransparencia.gov.br/download-de-dados/emendas-parlamentares
 
-![Emendas](/docs/imagens/emendas.png)
+![Emendas](../conversadigital/assets/images/emendas.png)
 
 ## A Linguagem de Programação Python
 

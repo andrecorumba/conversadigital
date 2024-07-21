@@ -93,11 +93,11 @@ A resposta no ChatGPT deve ficar neste formato. Senão, copie e cole novamente a
 
 `Formate a resposta separada por ";" para ser copiada e colada diretamente em um arquivo csv.`
 
-![Exemplo de Saída](imagens/captura-chat-gpt.png)
+![Exemplo de Saída](../conversadigital/assets/images/captura-chat-gpt.png)
 
 
 Segue um exemplo de como ficou o resultado depois de copiado e colado no excel:
-![Matriz de Risco](imagens/matriz-de-risco.png)
+![Matriz de Risco](../conversadigital/assets/images/matriz-de-risco.png)
 
 
 ## Relatoria dos Achados
