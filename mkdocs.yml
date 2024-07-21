@@ -1,25 +1,42 @@
 site_name: ConversaDigital
-
+repo_name: Powered by andrecorumba 
+repo_url: https://github.com/andrecorumba
+copyright: Copyright &copy; 2024 André Rocha
 theme:
   name: material
+  language: pt-BR
   features:
       - content.code.copy
+      - navigation.instant
+      - navigation.instant.prefetch
+      - navigation.tabs
+      - navigation.tabs.sticky
+      - navigation.indexes
+      - search.share
   palette: 
-
-      # Palette toggle for light mode
       - scheme: default
+        primary: teal
         toggle:
-            icon: material/brightness-7 
+            icon: material/weather-night
             name: Switch to dark mode
-
-    # Palette toggle for dark mode
       - scheme: slate
+        primary: teal
         toggle:
-            icon: material/brightness-4
+            icon: material/weather-sunny
             name: Switch to light mode
+  logo: assets/logo.webp
 
 markdown_extensions:
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - toc:
+      title: Nesta Página
+
+plugins:
+  - blog
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
